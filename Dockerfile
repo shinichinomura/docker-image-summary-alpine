@@ -6,6 +6,8 @@ RUN apk add python python-dev py-pip git gfortran build-base py-numpy@testing py
 RUN pip install janome
 RUN pip install git+https://github.com/shinichinomura/summpy
 
-EXPOSE 8080
-CMD ["python", "-m", "summpy.server", "-h", "0.0.0.0", "-p", "8080"]
+RUN adduser -D summpy
+USER summpy
+
+CMD python -m summpy.server -h 0.0.0.0 -p $PORT
 
